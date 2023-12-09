@@ -1,0 +1,225 @@
+// Numbers
+
+#Numbers {
+    .Numbers-list {
+        li {
+            &:first-child {
+                font-weight: 700;
+                font-size: 32px;
+            }
+
+            &:nth-child(2) {
+                font-size: 32.5px;
+                border: 2.5px solid red;
+            }
+
+            &:nth-child(3) {
+                font-size: 18px;
+                border: 2.8px solid blue;
+                border-radius: 20%;
+                padding-top: 25%;
+            }
+
+            &:nth-child(4) {
+                font-size: 32.9px;
+                border: 0.33256478944em dotted #831488;
+
+                span {
+                    &:first-child {
+                        font-size: 2em;
+                        font-weight: 700;
+                    }
+
+                    &:last-child {
+                        font-weight: 900;
+                        font-size: 3.1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Strings
+// Normal Strings
+$string-1: "Helvetica";
+$string-2: "Time New Roman";
+
+// Escape "\"
+$string-3: bold;
+$string-4: $string-1 + "sans-serif";
+
+#Strings {
+    .Strings-list {
+        font-size: 1.1rem;
+
+        li {
+            &:first-child {
+                font-family: $string-1;
+            }
+
+            &:nth-child(2) {
+                font-family: $string-2;
+            }
+
+            &:nth-child(3) {
+                font-weight: $string-3;
+                font-family: $string-1;
+            }
+
+            &:last-child {
+                span {
+                    &:first-child {
+                        font-family: $string-4;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Colors
+
+$named: red;
+$hexa: #444;
+$rgb: rgb(25, 16, 30);
+
+#Colors {
+    .Colors-list {
+        font-size: 1.5rem;
+
+        li {
+            &:first-child {
+                color: $named;
+            }
+
+            &:nth-child(2) {
+                color: $named;
+                background-color: $hexa;
+            }
+
+            &:nth-child(3) {
+                background-color: $rgb;
+                $rgb: rgb(103, 28, 143);
+                color: $rgb;
+            }
+
+            &:nth-child(4) {
+                background-color: rgba($rgb, 0.55);
+
+                span {
+                    &:first-child {
+                        background-color: rgba($named, 0.7);
+                    }
+
+                    &:last-child {
+                        background-color: rgba($hexa, 0.2);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Lists
+
+$list-1: 2rem, 3rem, 4rem;
+$bg-c: green, blue, red;
+
+$list-1: append($list-1 , 5rem);
+$bg-c: append($bg-c, purple);
+
+@each $size in $list-1 {
+    .list-item-#{$size} {
+        font-size: $size;
+        height: $size;
+        width: $size;
+    }
+}
+
+@each $bg in $bg-c {
+    .bg-#{$bg} {
+        background-color: $bg;
+    }
+}
+
+// Maps
+
+$blue-color-map: (
+    "light":lightblue,
+    "medium":blue,
+    "hard":darkblue,
+);
+
+$background-color-map: (
+    "bg-light":pink,
+    "bg-medium":red,
+    "bg-hard":darkred,
+);
+
+$bg-and-text-color-map: (
+    map-merge($blue-color-map, $background-color-map)
+);
+
+.Maps-list {
+    .list-item {
+        font-size: 1.5rem;
+
+        &:first-child {
+            color: map-get($blue-color-map, light);
+        }
+
+        &:nth-child(2) {
+            color: map-get($blue-color-map, hard);
+        }
+
+        &:nth-child(3) {
+            color: map-get($blue-color-map, hard);
+        }
+
+        &:nth-child(4) {
+            background-color: map-get($background-color-map, bg-light);
+            color: map-get($bg-and-text-color-map, bg-medium);
+        }
+
+        &:nth-child(5) {
+            background-color: map-get($bg-and-text-color-map, bg-hard);
+            color: map-get($bg-and-text-color-map, bg-medium);
+        }
+    }
+}
+
+// Booleans
+
+@mixin avatar ($size, $circle: true) {
+    width: $size;
+    height: $size;
+
+    @if $circle {
+        border-radius: $size / 2;
+    }
+}
+
+.square {
+    background-color: red;
+    @include avatar(100px, false)
+}
+
+.circle {
+    background-color: blue;
+    @include avatar(150px)
+}
+
+// Null
+
+$variable: null;
+$color: red;
+$size: 1.5rem;
+
+.container {
+    color: lighten($color, 10%);
+    background-color: darken($color, 80%);
+    padding: $size / 1.2;
+    margin: $size *1.2;
+    font-size: $size + 2;
+}

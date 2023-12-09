@@ -1,0 +1,86 @@
+// Function 
+
+// @fuction <name> (<argument>) {
+// @return;
+// }
+// Example 1
+// Font Map
+$font-size: (
+    "small": 1.5rem,
+    "Medium":2.5rem,
+    "larger": 3rem
+);
+
+// Color Map
+$color-map: (
+    "success":green,
+    "danger":red,
+    "info":blue,
+);
+// Merged Maps
+$font-color-size: map-merge($font-size, $color-map);
+
+// Function  for font size
+@function fontsize($size) {
+    @return map-get($font-size, $size);
+}
+
+// Function for Colors
+@function colorMap($color) {
+    @return map-get($color-map, $color)
+}
+
+#Lists {
+    li {
+        &:first-child {
+            font-size: fontsize(small);
+        }
+
+        &:nth-child(2) {
+            font-size: fontsize(Medium);
+        }
+
+        &:nth-child(3) {
+            font-size: fontsize(larger);
+        }
+
+        &:nth-child(4) {
+            color: colorMap(success);
+            font-size: fontsize(Medium);
+        }
+
+        &:nth-child(5) {
+            color: colorMap(danger);
+            font-size: fontsize(small);
+        }
+
+        &:nth-child(6) {
+            color: colorMap(info);
+            font-size: fontsize(larger);
+        }
+
+        &:last-child {
+            color: style(success);
+        }
+    }
+}
+
+// Example 2
+
+$btn-t-c: (
+    "light":#fff,
+    "dark":#333
+);
+
+$btn-bg-c: (
+    "bg-success":#28a745,
+    "bg-danger":#dc3545,
+    "bg-info":#17a2b8,
+    "bg-waring":#ffc107,
+);
+
+$colors: map-merge($btn-t-c, $btn-bg-c);
+
+@function colors($bt-c) {
+    @return map-get($colors, $bt-c)
+}

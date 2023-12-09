@@ -1,0 +1,128 @@
+// Mixin 
+
+@mixin Mixin-name {}
+
+@mixin FlexMix {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin GridMix {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.list {
+    @include FlexMix();
+
+    a {
+        list-style: none;
+        text-decoration: none;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        li {
+            background-color: #333;
+            padding: 0.5rem;
+        }
+    }
+}
+
+// .Blog {
+//     &-content {
+//         @include GridMix();
+//     }
+// }
+
+// Argument
+
+@mixin Flex($direction) {
+    display: flex;
+    flex-flow: $direction;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin Grid($repeat) {
+    display: grid;
+    grid-template-columns: repeat($repeat, 1fr);
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin nav {
+    list-style: none;
+    text-decoration: none;
+    font-size: 2rem;
+    padding: 1rem;
+    background-color: #666;
+}
+
+@mixin Hover {
+    color: red;
+    background-color: #fff;
+}
+
+@mixin Text($size, $color, $alin) {
+    font-size: $size;
+    color: $color;
+    text-align: $alin;
+}
+
+.Arguments {
+    @include GridMix;
+    grid-template-columns: 20% 80%;
+
+    .flex {
+        ul {
+            @include nav;
+            @include Flex(column);
+            border-right: 5px solid #333;
+
+            & a:hover {
+                @include Hover;
+            }
+        }
+    }
+
+    .grid {
+        @include Grid(3);
+        gap: 0 2rem;
+
+        div:nth-child(even) {
+            @include Text(2rem, green, center)
+        }
+
+        div:nth-child(odd) {
+            @include Text(1.5rem, blue, left)
+        }
+
+        h3 {
+            @include Text(3rem, red, center)
+        }
+
+        p {
+            @include Text(0.7rem, gray, right)
+        }
+    }
+}
+
+// Keyword Arguments
+
+@mixin square ($size, $radius: 0) {
+    width: $size;
+    height: $size;
+
+    @if $radius !=0 {
+        border-radius: $radius;
+    }
+}
+
+.avatar {
+    background-color: red;
+    text-align: center;
+    @include square(200px, 50%);
+}

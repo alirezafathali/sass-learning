@@ -1,0 +1,186 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Variables
+// Create Variables
+@import "./assets/SCSS/-library.scss";
+$font-s: 32px;
+$primary-color: red;
+$secondary-color: rgb(8, 0, 255);
+
+// Variables in a Variable
+
+$bg-color: rgba($secondary-color, 0.5);
+
+#Variables {
+    li {
+        font-size: $font-s;
+
+        &:first-child {
+            color: $primary-color;
+        }
+
+        &:nth-child(even) {
+            color: $secondary-color;
+        }
+
+        &:last-child:hover {
+            color: $primary-color;
+            background-color: $bg-color;
+            cursor: pointer;
+        }
+    }
+}
+
+// Default values
+
+#Default {
+    li.#{Default} {
+        font-size: $default-font-s;
+
+        &:first-child {
+            color: $primary-color;
+            color: $default-c;
+        }
+
+        $default-c: green;
+
+        &:nth-child(even) {
+            color: $secondary-color;
+            color: $default-c;
+        }
+
+        $default-c: green;
+
+        &:last-child:hover {
+            color: $secondary-color;
+            background-color: $default-c;
+            cursor: pointer;
+            box-shadow: $box-shadow;
+        }
+    }
+}
+
+// Scope
+
+$font-normal: 200;
+$font-bold: 900;
+
+#Scope {
+    li {
+        font-weight: $font-normal;
+        color: $primary-color;
+
+        &:first-child {
+            $scope: green;
+            color: $scope;
+        }
+
+        &:nth-child(2) {
+            color: $secondary-color;
+        }
+    }
+}
+
+// Shadowing
+
+$bold: 900;
+$color: red;
+
+.Shadowing {
+    p {
+        font-size: 2rem;
+
+        &:first-child {
+            color: green;
+            $bold: 500;
+            font-weight: $bold;
+        }
+
+        &:nth-child(2) {
+            $color: blue !global;
+            color: $color;
+            font-weight: $bold;
+        }
+
+        &:last-child {
+            color: $color;
+            font-weight: $bold;
+        }
+    }
+}
+
+// Flow Control Scope
+
+$dark-theme: false !default;
+$primary-color: #3f4bf7;
+$accent-color: #6a1b9a;
+$text-color: red !default;
+
+
+@if $dark-theme {
+    $primary-color: darken($primary-color, 100%);
+    $accent-color: lighten($accent-color, 50%);
+    $text-color: lighten($text-color, 10%);
+}
+
+.Flow {
+    p {
+        background-color: $primary-color;
+        border-radius: 5px solid $accent-color;
+        color: $text-color;
+        border-radius: 3px;
+        font-size: 2rem;
+
+        &:first-child {
+            $dark-theme: true;
+            $primary-color: #3f4bf7;
+            $accent-color: #6a1b9a;
+            $text-color: red !default;
+
+            @if $dark-theme {
+                $primary-color: darken($primary-color, 60%);
+                $accent-color: lighten($accent-color, 50%);
+                $text-color: lighten($text-color, 50%);
+            }
+
+            background-color: $primary-color;
+            border: 5px solid $accent-color;
+            color: $text-color;
+        }
+    }
+}
+
+// Advance  Variable  Functions
+
+$theme-color: (
+    "suceess":green,
+    "info":lightblue,
+    "warning":red,
+);
+
+$colors: (
+    "lighte":rgba(197, 83, 30),
+    "darke":black,
+    "whittte":white
+);
+
+.Advanced {
+    p {
+        font-size: 2rem;
+
+        &:first-child {
+            background-color: map-get($theme-color, suceess);
+            color: map-get($colors, whittte);
+        }
+
+        &:nth-child(2) {
+            background-color: map-get($theme-color , info);
+            color: map-get($colors, darke);
+        }
+
+        &:last-child {
+            background-color: map-get($theme-color , warning);
+            color: map-get($colors, lighte);
+        }
+    }
+}
